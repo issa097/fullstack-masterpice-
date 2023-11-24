@@ -42,6 +42,8 @@ const WorkShopRouter = require("./routs/WorkShopRouter");
 const ContactRouter = require("./routs/ContactRouter");
 const BlogRouter = require("./routs/BlogRouter");
 const workshop_bookings = require("./routs/workshop_bookingsRouter");
+const RatingRouter = require("./routs/RatingRouter");
+
 const cors = require("cors");
 const app = express();
 const path = require("path");   
@@ -58,6 +60,9 @@ app.use(WorkShopRouter);
 app.use(ContactRouter);
 app.use(BlogRouter);
 app.use(workshop_bookings);
+
+app.use(RatingRouter);
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.set("view engine", "ejs");

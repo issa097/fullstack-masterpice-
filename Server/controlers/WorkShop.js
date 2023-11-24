@@ -26,8 +26,6 @@ const newShop = async (req, res) => {
       workshop_name,
       workshop_dis,
       workshop_title,
-      workshop_start,
-      workshop_end,
     } = req.body;
     const product_img = req?.file?.path ? req.file.path : "majdi";
     // console.log(
@@ -42,8 +40,7 @@ const newShop = async (req, res) => {
       workshop_name,
       workshop_dis,
       workshop_title,
-      workshop_start,
-      workshop_end
+    
     );
 
     return res.status(200).json(newblog.rows);

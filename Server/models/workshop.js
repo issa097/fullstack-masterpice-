@@ -15,17 +15,15 @@ function newShop(
   workshop_name,
   workshop_dis,
   workshop_title,
-  workshop_start,
-  workshop_end
+
 ) {
   const queryText =
-    "INSERT INTO workshops (workshop_name, workshop_dis, workshop_title, workshop_start, workshop_end) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+    "INSERT INTO workshops (workshop_name, workshop_dis, workshop_title) VALUES ($1, $2, $3) RETURNING *";
   const values = [
     workshop_name,
     workshop_dis,
     workshop_title,
-    workshop_start,
-    workshop_end,
+  
   ];
   return db.query(queryText, values);
 }

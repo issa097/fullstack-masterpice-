@@ -57,15 +57,13 @@ function uploadImg(req, res, next) {
         res.status(500).send("Error uploading image.");
       } else {
         const bucket = admin.storage().bucket();
-        console.log(req.file);
-        console.log(req.image);
-        console.log(req.file);
+
         const imageBuffer = req.file.buffer;
         const imageName = req.file.originalname;
         const file = bucket.file(imageName);
         const fileType = req.file.mimetype;
         const result = await file.save(imageBuffer, { contentType: fileType });
-        console.log("Image uploaded successfully:", result);
+        console.log("Image uploaded successfully:");
         const Name = imageName;
         getImageDownloadUrl(Name)
           .then((url) => {

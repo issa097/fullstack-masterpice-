@@ -5,9 +5,9 @@ const stripe = require("stripe")(
 
 const newpayment = async (req, res) => {
   // console.log(req.body);
+  const user_id = req.user;
   try {
     const {
-      user_id,
       cardholder,
       country,
       state,
@@ -16,9 +16,9 @@ const newpayment = async (req, res) => {
       paymentMethodId,
       phone,
       amount,
-      product_id
+      product_id,
     } = req.body;
-    console.log(typeof amount);
+    // console.log(typeof amount);
     // const payment_img = req?.file?.path ? req.file.path : "majdi";
     // console.log(payment_img);
 
@@ -49,6 +49,7 @@ const newpayment = async (req, res) => {
 
         return res.status(200).json(newpayment.rows);
       } catch (error) {
+        console.log(error);
         return res.status(500).json("internal server error");
       }
 
@@ -111,6 +112,5 @@ module.exports = {
   deletepayment,
 };
 
-
-// cros 
-// cors_id  , cors_name ,cors_dis , cors_trinner , cors_location , date , hour 
+// cros
+// cors_id  , cors_name ,cors_dis , cors_trinner , cors_location , date , hour

@@ -27,17 +27,20 @@ export default function GoolgeSignInButton() {
           }
         )
         .then(async (res) => {
-          window.location.href = "/Payment";
+          window.location.href = "/";
 
           /// issa api res.body
           try {
             const response = await axios.post(
-              "http://localhost:9000/google",
+              "http://localhost:8000/google",
               res.data
             );
             console.log(res);
 
             console.log(response.data);
+            // const user = response.data.user;
+            const token = response.data.token;
+            localStorage.setItem("token", token);
             // navigate('/');
           } catch (error) {
             console.log(error);

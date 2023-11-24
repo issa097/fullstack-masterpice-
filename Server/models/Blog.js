@@ -12,15 +12,17 @@ function getBlog(blog_id) {
 }
 
 function getBlogidUser(user_id) {
-    const queryText = "SELECT * FROM Blog WHERE user_id = $1";
-    const value = [user_id];
-    return db.query(queryText, value);
-  }
+  const queryText = "SELECT * FROM Blog WHERE user_id = $1";
+  const value = [user_id];
+  return db.query(queryText, value);
+}
 
-function newblog(title, content, user_id, created_at, blog_img) {
+function newblog(title, content, user_id, blog_img) {
+  // console.log(title, content, user_id, created_at, blog_img);
+
   const queryText =
-    "INSERT INTO Blog ( title, content, user_id, created_at, blog_img) VALUES ($1, $2, $3, $4, $5) RETURNING *";
-  const values = [title, content, user_id, created_at, blog_img];
+    "INSERT INTO Blog ( title, content, user_id, blog_img) VALUES ($1, $2, $3, $4) RETURNING *";
+  const values = [title, content, user_id, blog_img];
   return db.query(queryText, values);
 }
 
@@ -76,8 +78,6 @@ function updateblog(
   return db.query(queryText, values);
 }
 
-
-
 //DashBoard
 function approved(blog_id) {
   const queryText = `SELECT * FROM blog WHERE blog_id = $1 AND approved = true `;
@@ -108,6 +108,5 @@ module.exports = {
   updateblog,
   approvedUpdate,
   approved,
-  approvedReject
-  
+  approvedReject,
 };

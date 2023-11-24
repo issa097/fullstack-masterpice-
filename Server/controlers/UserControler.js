@@ -63,6 +63,7 @@ const updateUser = async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const result = await User.updateUser(user_id, username, email, password);
+    console.log(user_id, username, email, password);
     return res.status(200).json(result.rows);
   } catch (error) {
     throw error;
@@ -89,6 +90,7 @@ const loginUser = async (req, res) => {
           key
         );
         console.log(token);
+        res.cookie("token", token, { httpOnly: true });
 
         return res.json({ user, token });
       } else {
@@ -114,7 +116,7 @@ const google = async (req, res) => {
         const user = existUser.rows[0];
 
         const token = jwt.sign(
-          { user_id: user.user_id, username: user.username }, // Payload
+          { user_id: user.user_id, username: user.username },
           key
         );
 

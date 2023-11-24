@@ -77,6 +77,8 @@ const PaymentForm = () => {
       console.log(paymentMethod);
       console.log("paymentMethod");
       // Send payment information to your server using Axios
+      axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('token')}`;
+
       const response = await axios.post(`http://localhost:8000/charge`, {
         paymentMethodId: paymentMethod.id,
         email: userEmail.toLowerCase(),
@@ -87,7 +89,7 @@ const PaymentForm = () => {
         state: state,
         address: address,
         user_id: 33,
-        product_id:2
+        product_id: 2,
       });
 
       localStorage.removeItem("items");
@@ -123,7 +125,7 @@ const PaymentForm = () => {
               {/* Email input */}
               <label
                 htmlFor="email"
-                className="mt-4 mb-2 block text-sm font-medium"
+                className="mt-4 mb-2 block text-xl font-medium"
               >
                 Email
               </label>

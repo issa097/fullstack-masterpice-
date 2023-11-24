@@ -32,17 +32,15 @@ const getBlogidUser = async (req, res) => {
 };
 
 const newblog = async (req, res) => {
-  try {
-    const { title, content, user_id, created_at } = req.body;
-    const blog_img = req?.file?.path ? req.file.path : "majdi";
+  const url = res.locals.site;
+  const user_id = req.user;
 
-    const newblog = await blog.newblog(
-      title,
-      content,
-      user_id,
-      created_at,
-      blog_img
-    );
+  try {
+    // console.log(req.body);
+    const { title, content } = req.body;
+    // const blog_img = req?.file?.path ? req.file.path : "majdi";
+
+    let newblog = await blog.newblog(title, content, user_id, url);
 
     return res.status(200).json(newblog.rows);
   } catch (error) {
@@ -80,9 +78,6 @@ const updateblog = async (req, res) => {
     throw error;
   }
 };
-
-
-
 
 //DashBoard
 const approved = async (req, res) => {
@@ -135,5 +130,5 @@ module.exports = {
   updateblog,
   approved,
   approvedUpdate,
-  approvedReject
+  approvedReject,
 };
