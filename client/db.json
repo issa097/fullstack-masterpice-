@@ -1,0 +1,70 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Introduction to Programming",
+      "description": "Learn the basics of programming with this introductory course.",
+      "image": "https://example.com/intro-to-programming.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Web Development Fundamentals",
+      "description": "Explore the fundamentals of web development and design.",
+      "image": "https://example.com/web-dev-fundamentals.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Data Science Essentials",
+      "description": "Dive into the essentials of data science and analytics.",
+      "image": "https://example.com/data-science-essentials.jpg"
+    }
+  ],
+  "shoppingcart": [
+    {
+      "id": 1,
+      "title": "Introduction to Programming",
+      "description": "Learn the basics of programming with this introductory course.",
+      "image": "https://example.com/intro-to-programming.jpg",
+      "price": 49.99,
+      "quantity": 2
+    },
+    {
+      "id": 2,
+      "title": "Web Development Fundamentals",
+      "description": "Explore the fundamentals of web development and design.",
+      "image": "https://example.com/web-dev-fundamentals.jpg",
+      "price": 79.99,
+      "quantity": 1
+    }
+
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Introduction to Programming",
+      "description": "Learn the basics of programming with this introductory course.",
+      "image": "https://example.com/intro-to-programming.jpg",
+      "price": 49.99,
+      "category": "Programming",
+      "counts": 10
+    },
+    {
+      "id": 2,
+      "name": "Web Development Fundamentals",
+      "description": "Explore the fundamentals of web development and design.",
+      "image": "https://example.com/web-dev-fundamentals.jpg",
+      "price": 79.99,
+      "category": "Web Development",
+      "counts": 5
+    },
+    {
+      "id": 3,
+      "name": "Data Science Essentials",
+      "description": "Dive into the essentials of data science and analytics.",
+      "image": "https://example.com/data-science-essentials.jpg",
+      "price": 99.99,
+      "category": "Data Science",
+      "counts": 8
+    }
+  ]
+}
