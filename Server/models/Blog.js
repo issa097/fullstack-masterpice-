@@ -1,7 +1,9 @@
 const db = require("../lib/db");
 
 function getAllBlog() {
-  return db.query("SELECT * FROM Blog WHERE is_deleted = false");
+  return db.query(
+    "SELECT * FROM Blog WHERE is_deleted = false AND approved = false "
+  );
 }
 
 function getBlog(blog_id) {
@@ -80,7 +82,7 @@ function updateblog(
 
 //DashBoard
 function approved(blog_id) {
-  const queryText = `SELECT * FROM blog WHERE blog_id = $1 AND approved = true `;
+  const queryText = `SELECT * FROM Blog WHERE blog_id = $1 AND approved = true`;
   const result = [blog_id];
 
   return db.query(queryText, result);

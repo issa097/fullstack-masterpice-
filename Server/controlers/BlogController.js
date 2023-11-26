@@ -40,7 +40,7 @@ const newblog = async (req, res) => {
     const { title, content } = req.body;
     // const blog_img = req?.file?.path ? req.file.path : "majdi";
 
-    let newblog = await blog.newblog(title, content, user_id, url);
+    const newblog = await blog.newblog(title, content, user_id, url);
 
     return res.status(200).json(newblog.rows);
   } catch (error) {
@@ -85,7 +85,7 @@ const approved = async (req, res) => {
   console.log(blog_id);
   try {
     const result = await blog.approved(blog_id);
-    return res.status(200).json(result.rows);
+    return res.status(200).json({result:result.rows});
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
