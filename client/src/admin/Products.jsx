@@ -31,7 +31,7 @@ const ProductDashboard = () => {
 
   const handleSearch = () => {
     const filteredProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      product.product_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(filteredProducts);
     setPageNumber(0); // Reset the page number when searching
@@ -92,7 +92,7 @@ const ProductDashboard = () => {
   const handleDeleteProduct = (productId) => {
     // Send a DELETE request to remove the product using Axios
     axios
-      .put(``)
+      .put(`http://localhost:8000/deleteproduct/${productId}`)
       .then((response) => {
         // Handle the successful response
         alert("Product deleted successfully");

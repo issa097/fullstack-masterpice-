@@ -5,7 +5,7 @@ const SECRET_KEY = "issa";
 const authenticateToken = async (req, res, next) => {
   // console.log(req.user)
   //   console.log(req);
-  //   const token = req.headers.authorization;
+  // const token = req.headers.authorization;
 
   const token = req.headers.cookie;
   console.log("😜😜😜😜😜😜😜😜😜😜😜😜");

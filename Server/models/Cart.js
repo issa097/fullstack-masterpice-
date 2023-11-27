@@ -7,7 +7,7 @@ function additem(product_id, user_id, quantity) {
 }
 
 function GetItem(user_id) {
-  const queryText = `SELECT products.product_name, products.price, products.product_img,cart.quantity FROM cart
+  const queryText = `SELECT products.product_name, products.price, products.product_img,products.product_id,cart.quantity FROM cart
     JOIN products ON cart.product_id = products.product_id
     WHERE cart.user_id = $1;`;
   const result = [user_id];

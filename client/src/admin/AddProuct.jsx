@@ -6,7 +6,7 @@ const AddProductForm = ({ onSave, onClose }) => {
     product_dis: "",
     price: 0,
     category_id: "",
-    product_img:"",
+    product_img: "",
   });
 
   const handleChange = (e) => {
@@ -53,8 +53,8 @@ const AddProductForm = ({ onSave, onClose }) => {
           </label>
           <input
             type="text"
-            id="product_detail"
-            name="product_detail"
+            id="product_dis"
+            name="product_dis"
             value={productData.product_dis}
             onChange={handleChange}
             className="w-full border p-2 rounded-md"

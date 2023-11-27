@@ -3,10 +3,16 @@ const express = require("express");
 const router = express.Router();
 const ProductsController = require("../controlers/ProductsControler");
 const uploadImg = require("../middlewares/MulterMiddlewares");
+const authMiddleware = require("../middlewares/authMiddleware");
 // const updateImg = require("../middlewares/update");
 const decode = require("../middlewares/auth");
 
-router.post("/product", uploadImg.uploadImg, ProductsController.newblog);
+router.post(
+  "/product",
+  authMiddleware.authenticateToken,
+  uploadImg.uploadImg,
+  ProductsController.newblog
+);
 
 // router.get("/products/:page/:limit", ProductsController.getBlogs);
 router.get("/products", ProductsController.getBlogs);

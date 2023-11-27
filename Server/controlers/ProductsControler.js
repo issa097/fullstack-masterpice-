@@ -1,9 +1,13 @@
 const products = require("../models/products");
 
 const newblog = async (req, res) => {
+  const url = res.locals.site;
+  const user_id = req.user;
+
+  console.log("😜😜😜😜😜😜");
+  console.log(user_id);
   try {
-    const url = res.locals.site;
-    const { product_name, category_id, price, user_id, product_dis } = req.body;
+    const { product_name, category_id, price, product_dis } = req.body;
     // const product_img = req?.file?.path ? req.file.path : "majdi";
     // console.log(
     //   product_name,
