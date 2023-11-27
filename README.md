@@ -16,5 +16,9 @@
 - Postgresql
 - Trello
 - Tilwind
+- Jwt
+- Stripe
+- Google sign-in
+- firebase
 
-  [Issa Haddad ](https://github.com/issa097)
+  [Issa Haddad](https://github.com/issa097)
