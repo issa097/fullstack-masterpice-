@@ -5,21 +5,21 @@ const SECRET_KEY = "issa";
 const authenticateToken = async (req, res, next) => {
   // console.log(req.user)
   //   console.log(req);
-  // const token = req.headers.authorization;
+  const token = req.headers.authorization;
 
-  const token = req.headers.cookie;
+  // const token = req.headers.cookie;
   console.log("😜😜😜😜😜😜😜😜😜😜😜😜");
 
-  const auth = token.split("=")[1].trim();
+  // const auth = token.split("=")[1].trim();
 
   console.log("😜😜😜😜😜😜😜😜😜😜😜😜😜");
-  if (auth == null) {
+  if (token == null) {
     // res.clearCookie("token");
     res.status(401).json("you need to login first");
   }
 
   try {
-    const decoded = jwt.verify(auth, SECRET_KEY);
+    const decoded = jwt.verify(token, SECRET_KEY);
     // req.user = await User.findById(decoded.userId);
 
     if (!decoded.user_id) {

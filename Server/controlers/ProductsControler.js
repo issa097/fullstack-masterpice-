@@ -1,8 +1,8 @@
 const products = require("../models/products");
 
 const newblog = async (req, res) => {
-  const url = res.locals.site;
   const user_id = req.user;
+  const url = res.locals.site;
 
   console.log("😜😜😜😜😜😜");
   console.log(user_id);

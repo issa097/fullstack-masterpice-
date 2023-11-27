@@ -49,6 +49,44 @@ async function getImageDownloadUrl(imageName) {
   }
 }
 
+// function uploadImg(req, res, next) {
+//   try {
+//     upload.single("image")(req, res, async function (err) {
+//       if (err) {
+//         console.error("Error uploading image:", err);
+//         res.status(500).send("Error uploading image.");
+//       } else {
+//         const bucket = admin.storage().bucket();
+
+// const imageBuffer = req.file ? req.file.buffer : null;
+// // const imageName = req.file ? req.file.originalname : null;
+//         const imageName = req.file.originalname;
+//         const file = bucket.file(imageName)
+//         const fileType = req.file.mimetype;
+//         const result = await file.save(imageBuffer, { contentType: fileType });
+//         console.log("Image uploaded successfully:");
+//         const Name = imageName;
+//         getImageDownloadUrl(Name)
+//           .then((url) => {
+//             res.locals.site = url;
+//             console.log("Download URL:", res.locals.site);
+//             next();
+//           })
+//           .catch((error) => {
+//             console.error("Error:", error);
+//           });
+//       }
+//     });
+//   } catch (error) {
+//     console.error("Error uploading image:", error);
+//     res.status(500).send("Error uploading image.");
+//   }
+// }
+
+
+
+
+
 function uploadImg(req, res, next) {
   try {
     upload.single("image")(req, res, async function (err) {
@@ -58,12 +96,22 @@ function uploadImg(req, res, next) {
       } else {
         const bucket = admin.storage().bucket();
 
-        const imageBuffer = req.file.buffer;
-        const imageName = req.file.originalname;
+        // Check if req.file exists before accessing its properties
+        const imageBuffer = req.file ? req.file.buffer : null;
+        const imageName = req.file ? req.file.originalname : null;
+
+        if (!imageName) {
+          console.error("No file name provided.");
+          res.status(400).send("No file name provided.");
+          return;
+        }
+
         const file = bucket.file(imageName);
         const fileType = req.file.mimetype;
+
         const result = await file.save(imageBuffer, { contentType: fileType });
         console.log("Image uploaded successfully:");
+
         const Name = imageName;
         getImageDownloadUrl(Name)
           .then((url) => {
@@ -82,57 +130,58 @@ function uploadImg(req, res, next) {
   }
 }
 
-async function updateImage(req, res, next) {
-  try {
-    upload.single("image")(req, res, async function (err) {
-      if (err) {
-        console.error("Error uploading image:", err);
-        res.status(500).send("Error uploading image.");
-      } else {
-        const bucket = admin.storage().bucket();
-        const imageBuffer = req.file.buffer;
-        const imageName = req.file.originalname;
-        const file = bucket.file(imageName);
-        const fileType = req.file.mimetype;
 
-        // إنشاء ملف للكتابة
-        const fileStream = file.createWriteStream({
-          metadata: {
-            contentType: fileType,
-          },
-        });
+// async function updateImage(req, res, next) {
+//   try {
+//     upload.single("image")(req, res, async function (err) {
+//       if (err) {
+//         console.error("Error uploading image:", err);
+//         res.status(500).send("Error uploading image.");
+//       } else {
+//         const bucket = admin.storage().bucket();
+//         const imageBuffer = req.file.buffer;
+//         const imageName = req.file.originalname;
+//         const file = bucket.file(imageName);
+//         const fileType = req.file.mimetype;
 
-        // كتابة البيانات إلى الملف
-        fileStream.end(imageBuffer);
+//         // إنشاء ملف للكتابة
+//         const fileStream = file.createWriteStream({
+//           metadata: {
+//             contentType: fileType,
+//           },
+//         });
 
-        // الانتظار حتى يتم الانتهاء من كتابة البيانات
-        await new Promise((resolve, reject) => {
-          fileStream.on("finish", resolve);
-          fileStream.on("error", reject);
-        });
+//         // كتابة البيانات إلى الملف
+//         fileStream.end(imageBuffer);
 
-        console.log("Image updated successfully");
+//         // الانتظار حتى يتم الانتهاء من كتابة البيانات
+//         await new Promise((resolve, reject) => {
+//           fileStream.on("finish", resolve);
+//           fileStream.on("error", reject);
+//         });
 
-        const updatedName = imageName;
-        getImageDownloadUrl(updatedName)
-          .then((url) => {
-            res.locals.site = url;
-            console.log("Download URL:", res.locals.site);
-            next();
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
-    });
-  } catch (error) {
-    console.error("Error updating image:", error);
-    res.status(500).send("Error updating image.");
-  }
-}
+//         console.log("Image updated successfully");
+
+//         const updatedName = imageName;
+//         getImageDownloadUrl(updatedName)
+//           .then((url) => {
+//             res.locals.site = url;
+//             console.log("Download URL:", res.locals.site);
+//             next();
+//           })
+//           .catch((error) => {
+//             console.error("Error:", error);
+//           });
+//       }
+//     });
+//   } catch (error) {
+//     console.error("Error updating image:", error);
+//     res.status(500).send("Error updating image.");
+//   }
+// }
 
 module.exports = {
   uploadImg,
   admin,
-  updateImage,
+
 };
