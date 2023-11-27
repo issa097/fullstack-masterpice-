@@ -1,6 +1,8 @@
 import { Card } from "@material-tailwind/react";
 import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert";
+// import PhoneInput from "react-phone-number-input/input";x  
+
 import { loadStripe } from "@stripe/stripe-js";
 import {
   CardElement,
@@ -21,6 +23,7 @@ const stripePromise = loadStripe(
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const [value, setValue] = useState()
 
   const [userEmail, setUserEmail] = useState("");
   const [cardholder, setCardholder] = useState("");
@@ -77,7 +80,9 @@ const PaymentForm = () => {
       console.log(paymentMethod);
       console.log("paymentMethod");
       // Send payment information to your server using Axios
-      axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('token')}`;
+      axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+        "token"
+      )}`;
 
       const response = await axios.post(`http://localhost:8000/charge`, {
         paymentMethodId: paymentMethod.id,
@@ -104,13 +109,13 @@ const PaymentForm = () => {
   };
 
   const showAlert = (message, icon) => {
-    alert(message, icon);
-    // Swal.fire({
-    //   title: icon === "success" ? "Success" : "Error",
-    //   text: message,
-    //   icon: icon,
-    //   confirmButtonText: "OK",
-    // });
+    // alert(message, icon);
+    Swal({
+      title: icon === "success" ? "Success" : "Error",
+      text: message,
+      icon: icon,
+      confirmButtonText: "OK",
+    });
   };
   return (
     <>
