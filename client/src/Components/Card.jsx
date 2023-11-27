@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 // import Swal from 'sweetalert';
 
-
-function Card({ category, product_name, price, image,  }) {
+function Card({ rating, name, price, image }) {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+  // console.log("object", name, price);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch cart items from local storage
-        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
         setCart(storedCart);
-  
+
         // Fetch data from your API
         const response = await axios.get("https://loocalhost:8000/products");
         // Log the data array specifically
-        console.log('API Data:', response.data);
-        
+        console.log("API Data:", response.data);
+
         // Set loading to false once data is fetched
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching data from API:', error);
+        console.error("Error fetching data from API:", error);
         // Set loading to false on error
         setLoading(false);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -66,9 +66,9 @@ function Card({ category, product_name, price, image,  }) {
   return (
     <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl mb-6">
       <div className="relative">
-      <img src= {image} className="h-72 w-72"  alt="Card Image" />
+        <img src={image} className="h-72 w-72" alt="Card Image" />
         <div className="absolute top-3 right-3">
-          <button >
+          <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -87,18 +87,19 @@ function Card({ category, product_name, price, image,  }) {
         </div>
       </div>
       <div className="px-4 py-3 w-72">
-        <span className="text-gray-400 mr-3 uppercase text-xs">{category}</span>
+        <span className="text-gray-400 mr-3 uppercase text-xs"></span>
         <Link to={"/details"}>
           <p className="text-lg font-medium text-black truncate block capitalize">
-            {product_name}
+            {name}
           </p>
         </Link>
         <div className="flex items-center">
           <p className="text-lg font-medium text-black cursor-auto my-3">
             {price}
           </p>
+          <span className="flex items-end w-50">{rating}</span>
           <div className="ml-auto">
-            <button >
+            <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"

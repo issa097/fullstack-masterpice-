@@ -330,6 +330,7 @@ const AllProducts = () => {
                 category={product.category_id}
                 price={product.price}
                 image={product.product_img}
+                rating={product.product_rating}
               />
             ))}
           </div>
