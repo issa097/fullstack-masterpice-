@@ -31,7 +31,34 @@ async function createRating(user_id, product_id, rating, comment) {
 }
 
 function getAllRating() {
-  return db.query("SELECT * FROM ratings  ");
+  return db.query("SELECT * FROM ratings");
 }
 
-module.exports = { createRating, getAllRating };
+function getRatingByUserAndProduct(user_id, product_id) {
+  const queryText =
+    "SELECT * FROM ratings WHERE user_id = $1 AND product_id = $2";
+
+  // "SELECT c.comment_text, u.username FROM comments c " +
+  // "JOIN users u ON c.user_id = u.user_id " +
+  // "WHERE c.user_id = $1 AND c.product_id = $2",
+  const valuse = [user_id, product_id];
+
+  return db.query(queryText, valuse);
+}
+function getRatingByUser(user_id) {
+  const queryText = "SELECT * FROM ratings WHERE user_id = $1 ";
+
+  // "SELECT c.comment_text, u.username FROM comments c " +
+  // "JOIN users u ON c.user_id = u.user_id " +
+  // "WHERE c.user_id = $1 AND c.product_id = $2",
+  const valuse = [user_id];
+
+  return db.query(queryText, valuse);
+}
+
+module.exports = {
+  createRating,
+  getAllRating,
+  getRatingByUserAndProduct,
+  getRatingByUser,
+};

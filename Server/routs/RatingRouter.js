@@ -11,10 +11,27 @@
 const express = require("express");
 const router = express.Router();
 const RatingController = require("../controlers/RatingControler");
+const authentication = require("../middlewares/authMiddleware");
 
 // router.post('/create', RatingController.createRating);
 // router.get('/read/:id', RatingController.getRatingsByProduct);
-router.post("/addRating", RatingController.addRating);
+//   authentication.authenticateToken,
+router.post(
+  "/addRating",
+  authentication.authenticateToken,
+  RatingController.addRating
+);
 router.get("/gitRating", RatingController.getAllRating);
+router.get(
+  "/getRatingByUser",
+  authentication.authenticateToken,
+  RatingController.getRatingByUser
+);
+router.get(
+  "/getRatingByUserAndProduct/:product_id",
+  authentication.authenticateToken,
+
+  RatingController.getRatingByUserAndProduct
+);
 
 module.exports = router;

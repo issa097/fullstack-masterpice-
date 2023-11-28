@@ -87,12 +87,12 @@ const PaymentForm = () => {
         email: userEmail.toLowerCase(),
         phone: userPhone,
         cardholder: cardholder,
-        // amount: cartData.price,
+        amount: 500,
         country: country,
         state: state,
         address: address,
         user_id: 33,
-        product_id: 2,
+        product_id: 38,
       });
       // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", cartData.price);
       localStorage.removeItem("items");
