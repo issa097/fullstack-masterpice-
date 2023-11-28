@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-// import GoogleSignUp from "../Components/GoogleSignup";
-import Swal from "sweetalert";
+import GoogleSignUp from "../Components/GoogleSignup";
+import Swal from 'sweetalert';
+
+
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
+   
   });
   const [errors, setErrors] = useState({});
 
@@ -23,13 +26,14 @@ const RegisterForm = () => {
     if (!formData.email || !emailRegex.test(formData.email)) {
       errors.email = "Invalid email address";
     }
-
+  
     if (!formData.password || formData.password.length < 6) {
       errors.password = "Password must be at least 6 characters long";
     }
-
+  
     return Object.keys(errors).length === 0;
   };
+  
 
   const redirectToLogin = () => {
     window.location.href = "/";
@@ -39,16 +43,16 @@ const RegisterForm = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post(
-          "http://localhost:8000/register",
-          formData
-        );
+        const response = await axios.post("http://localhost:8000/register", formData);
         console.log(response.data.message);
+          // const user = response.data.user;
+      // const token = response.data.token;
+      // localStorage.setItem("token", token);
         Swal({
-          icon: "success",
-          title: "Registration Successful!",
-          text: "You have successfully registered.",
-          confirmButtonColor: "#C08261",
+          icon: 'success',
+          title: 'Registration Successful!',
+          text: 'You have successfully registered.',
+          confirmButtonColor: '#C08261',
         }).then(() => {
           redirectToLogin();
         });
@@ -56,17 +60,17 @@ const RegisterForm = () => {
         console.error("Error registering user:", error);
         setErrors(error.response.data.errors);
         Swal({
-          icon: "error",
-          title: "Registration Failed!",
-          text: "There was an error during registration. Please try again.",
-          confirmButtonColor: "#d33",
+          icon: 'error',
+          title: 'Registration Failed!',
+          text: 'There was an error during registration. Please try again.',
+          confirmButtonColor: '#d33',
         });
       }
     }
   };
 
-  return (
-    <div className="font-[sans-serif] bg-[#C08261] text-[#C08261]">
+    return (
+      <div className="font-[sans-serif] bg-[#C08261] text-[#C08261]">
       <div className="min-h-screen flex flex-col items-center justify-center lg:p-6 p-4">
         <div className="grid md:grid-cols-2 items-center gap-10 max-w-6xl w-full">
           <form
@@ -74,7 +78,7 @@ const RegisterForm = () => {
             onSubmit={handleSubmit}
           >
             <h3 className="text-3xl font-extrabold mb-12 max-md:text-center">
-              Sign Up
+       Sign Up
             </h3>
             <div>
               <input
@@ -127,13 +131,14 @@ const RegisterForm = () => {
             <div className="!mt-10">
               <button
                 type="button"
-                className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#C08261] hover:bg-[#E2C799] focus:outline-none"
-                onClick={handleSubmit}
+                className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#C08261] hover:bg-[#E2C799] focus:outline-none" onClick={handleSubmit}
               >
                 Register
               </button>
             </div>
-            <div className="mt-4">{/* <GoogleSignUp /> */}</div>
+            <div className="mt-4">
+              <GoogleSignUp />
+              </div>
           </form>
           <div className="max-md:text-center text-right">
             <h2 className="text-4xl font-extrabold lg:leading-[50px] text-white">
@@ -143,11 +148,8 @@ const RegisterForm = () => {
               A Place Where You Can Find Your Local Grocery And More
             </p>
             <p className="text-sm mt-10 text-white">
-              Already Have An Account{" "}
-              <Link
-                to="/login"
-                className="text-white font-semibold underline ml-1"
-              >
+              Already Have An Account{' '}
+              <Link to="/login" className="text-white font-semibold underline ml-1">
                 Login Here
               </Link>
             </p>
@@ -157,5 +159,6 @@ const RegisterForm = () => {
     </div>
   );
 };
+ 
 
 export default RegisterForm;

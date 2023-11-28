@@ -7,6 +7,10 @@ import Footer from '../Components/Footer';
 import Courses from '../Components/Courses';
 import UserProfile from './UserProfile';
 import Details from './Details';
+import Benifts from '../Components/Benifts';
+import Blogs from '../Components/Blogs';
+
+
 
 
 const Home = () => {
@@ -14,11 +18,12 @@ const Home = () => {
     <div>
       <Nav />
       <Hero />
+      <Benifts />
       <Categories />
       <Cards />
       < Courses />
-      {/* < UserProfile /> */}
-      < Details />
+ 
+      < Blogs />
       < Footer />
     </div>
   );

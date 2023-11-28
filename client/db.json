@@ -41,30 +41,21 @@
   "products": [
     {
       "id": 1,
-      "name": "Introduction to Programming",
-      "description": "Learn the basics of programming with this introductory course.",
-      "image": "https://example.com/intro-to-programming.jpg",
-      "price": 49.99,
-      "category": "Programming",
-      "counts": 10
+      "product_img": "url_to_image1",
+      "product_name": "Product 1",
+      "price": 10.99
     },
     {
       "id": 2,
-      "name": "Web Development Fundamentals",
-      "description": "Explore the fundamentals of web development and design.",
-      "image": "https://example.com/web-dev-fundamentals.jpg",
-      "price": 79.99,
-      "category": "Web Development",
-      "counts": 5
+      "product_img": "url_to_image2",
+      "product_name": "Product 2",
+      "price": 19.99
     },
     {
       "id": 3,
-      "name": "Data Science Essentials",
-      "description": "Dive into the essentials of data science and analytics.",
-      "image": "https://example.com/data-science-essentials.jpg",
-      "price": 99.99,
-      "category": "Data Science",
-      "counts": 8
+      "product_img": "url_to_image3",
+      "product_name": "Product 3",
+      "price": 25.99
     }
   ]
 }

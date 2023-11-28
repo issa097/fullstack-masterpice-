@@ -166,9 +166,8 @@ const ProductDashboard = () => {
                 <td className="p-2 text-sm">{product.product_name}</td>
                 <td className="p-2 text-sm">{product.category_id}</td>
                 <td className="p-2 text-sm">${product.price}</td>
-                <img src={product.product_img} alt="image" />
-
                 {/* <td className="p-2 text-sm">{product.product_img}</td> */}
+                <img src={product.product_img} alt="" />
                 <td className="p-2 text-sm">{product.product_dis}</td>
                 <td className="p-2 text-sm">
                   <div className="flex justify-center">
@@ -213,7 +212,7 @@ const ProductDashboard = () => {
       )}
       {isAddProductFormVisible && (
         <AddProductForm
-          onSave={handleAddProduct}
+          // onSave={handleAddProduct}
           onClose={() => setIsAddProductFormVisible(false)}
         />
       )}

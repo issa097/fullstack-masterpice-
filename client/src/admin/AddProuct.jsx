@@ -157,7 +157,7 @@ const AddProductForm = ({ onSave, onClose }) => {
     product_dis: "",
     price: 0,
     category_id: "",
-    product_img:""
+    // product_img:""
   });
 
   const [image, setImage] = useState(null);

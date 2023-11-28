@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert";
-import GoolgeSignInButton from "../Components/GoogleSignInButton";
+import GoolgeSignInButton from "../Components/GoogleSignup";
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",

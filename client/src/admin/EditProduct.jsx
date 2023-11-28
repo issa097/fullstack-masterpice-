@@ -2,18 +2,13 @@ import React, { useState } from "react";
 
 const ProductForm = ({ product, onEdit, onClose }) => {
   const [editedProduct, setEditedProduct] = useState(product);
-  const [imageFile, setImageFile] = useState(null);
-  // const [imageFile1, setImageFile1] = useState(product.product_img);
-  //console.log("object",imageFile)
+  const [image, setImage] = useState(null);
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImageFile(file);
+    setImage(file);
   };
-  console.log(imageFile);
-  // const handleEdit = () => {
-  //   onEdit(editedProduct, imageFile);
-  //   onClose();
-  // };
+
   const handleEdit = () => {
     const formData = new FormData();
     formData.append("product_id", editedProduct.product_id);
@@ -21,14 +16,17 @@ const ProductForm = ({ product, onEdit, onClose }) => {
     formData.append("product_dis", editedProduct.product_dis);
     formData.append("price", editedProduct.price);
     formData.append("category_id", editedProduct.category_id);
-    formData.append("image", imageFile);
+    formData.append("image", image);
+
     const data = {
       formData,
       product_id: editedProduct.product_id,
     };
+    
     onEdit(data);
     // onClose();
   };
+
   return (
     <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-60">
       <div className="bg-white p-4 rounded-lg w-full mx-72">

@@ -1,8 +1,5 @@
 import { Card } from "@material-tailwind/react";
 import React, { useState, useEffect, useContext } from "react";
-import Swal from "sweetalert";
-// import PhoneInput from "react-phone-number-input/input";x  
-
 import { loadStripe } from "@stripe/stripe-js";
 import {
   CardElement,
@@ -11,6 +8,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
+// import { useOrder } from "../OrderContext/OrderContext";
 
 // import "react-phone-number-input/style.css";
 // import GoogleSignInButton from "./GoogleSignInButton";
@@ -23,7 +21,6 @@ const stripePromise = loadStripe(
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const [value, setValue] = useState()
 
   const [userEmail, setUserEmail] = useState("");
   const [cardholder, setCardholder] = useState("");
@@ -32,7 +29,8 @@ const PaymentForm = () => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
-
+  // const { cartData } = useOrder();
+  // console.log("object", cartData);
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
   };
@@ -89,14 +87,14 @@ const PaymentForm = () => {
         email: userEmail.toLowerCase(),
         phone: userPhone,
         cardholder: cardholder,
-        amount: 500,
+        // amount: cartData.price,
         country: country,
         state: state,
         address: address,
         user_id: 33,
         product_id: 2,
       });
-
+      // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", cartData.price);
       localStorage.removeItem("items");
       localStorage.removeItem("itemsQ");
 
@@ -109,13 +107,13 @@ const PaymentForm = () => {
   };
 
   const showAlert = (message, icon) => {
-    // alert(message, icon);
-    Swal({
-      title: icon === "success" ? "Success" : "Error",
-      text: message,
-      icon: icon,
-      confirmButtonText: "OK",
-    });
+    alert(message, icon);
+    // Swal.fire({
+    //   title: icon === "success" ? "Success" : "Error",
+    //   text: message,
+    //   icon: icon,
+    //   confirmButtonText: "OK",
+    // });
   };
   return (
     <>
@@ -224,6 +222,13 @@ const PaymentForm = () => {
                 {/* ... */}
               </div>
               {/* ... */}
+              {/* <ul>
+                {cartData.map((item) => (
+                  <li key={item.id}>
+                    {item.product_name}- Price: {item.price}
+                  </li>
+                ))}
+              </ul> */}
               <label
                 htmlFor="card-details"
                 className="mt-4 mb-2 block text-sm font-medium"
