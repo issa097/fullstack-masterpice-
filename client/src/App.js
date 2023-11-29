@@ -14,12 +14,12 @@ import YourComponent from "./admin/Sidebar";
 import NotFound from "./Pages/NotFound";
 import AllBlogs from "./Pages/AllBlogs";
 import BlogsDetails from "./Pages/BlogsDetails";
-// import { OrderProvider } from "./OrderContext/OrderContext";
+import { OrderProvider } from "./OrderContext/OrderContext";
 
 const App = () => {
   return (
     <Router>
-      {/* <OrderProvider> */}
+      <OrderProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/details/:id" element={<Details />} />
@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/blogsdetails/:id" element={<BlogsDetails />} />
           {/* <Route path='/payment' element={<PaymentForm />} /> */}
         </Routes>
-      {/* </OrderProvider> */}
+      </OrderProvider>
     </Router>
   );
 };

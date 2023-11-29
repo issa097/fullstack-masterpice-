@@ -8,7 +8,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-// import { useOrder } from "../OrderContext/OrderContext";
+import { useOrder } from "../OrderContext/OrderContext";
 
 // import "react-phone-number-input/style.css";
 // import GoogleSignInButton from "./GoogleSignInButton";
@@ -29,8 +29,8 @@ const PaymentForm = () => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
-  // const { cartData } = useOrder();
-  // console.log("object", cartData);
+  const { cartData } = useOrder();
+  console.log("object", cartData);
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
   };
@@ -91,8 +91,9 @@ const PaymentForm = () => {
         country: country,
         state: state,
         address: address,
-        user_id: 33,
-        product_id: 38,
+        cart: cartData,
+        // user_id: user_id,
+        // product_id: 38,
       });
       // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", cartData.price);
       localStorage.removeItem("items");
@@ -222,13 +223,14 @@ const PaymentForm = () => {
                 {/* ... */}
               </div>
               {/* ... */}
-              {/* <ul>
+              <ul>
                 {cartData.map((item) => (
                   <li key={item.id}>
-                    {item.product_name}- Price: {item.price}
+                    {item.product_name}- Price: {item.price}-product:
+                    {item.product_id}
                   </li>
                 ))}
-              </ul> */}
+              </ul>
               <label
                 htmlFor="card-details"
                 className="mt-4 mb-2 block text-sm font-medium"

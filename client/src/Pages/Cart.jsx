@@ -149,14 +149,14 @@ import axios from "axios";
 import Counter from "../Components/Counter";
 import { Link } from "react-router-dom";
 import Payment from "./Payment";
-// import { useOrder } from "../OrderContext/OrderContext";
+import { useOrder } from "../OrderContext/OrderContext";
 
 const Cart = () => {
   const [cartProduct, setCartProduct] = useState([]);
   console.log("firstttttttttttttttttttttt", cartProduct);
   const [total, setTotal] = useState([]);
   console.log("22222222222222", total);
-  // const { cartData, setOrderData } = useOrder();
+  const { cartData, setOrderData } = useOrder();
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -238,10 +238,10 @@ const Cart = () => {
   // };
 
   // usecontext
-  // const handleCheckout = () => {
-  //   // يمكنك تحديث حالة الطلب هنا
-  //   setOrderData(total);
-  // };
+  const handleCheckout = () => {
+    // يمكنك تحديث حالة الطلب هنا
+    setOrderData(total);
+  };
 
   return (
     <section className="h-full py-12 sm:py-16 lg:py-20">
@@ -273,7 +273,7 @@ const Cart = () => {
                   <Link to="/payment">
                     <button
                       type="button"
-                      // onClick={handleCheckout}
+                      onClick={handleCheckout}
                       className="group inline-flex w-full items-center justify-center rounded-md bg-[#17403C] px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-[#C3CAC3]"
                     >
                       Checkout

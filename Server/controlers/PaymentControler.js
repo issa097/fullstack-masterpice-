@@ -16,8 +16,15 @@ const newpayment = async (req, res) => {
       paymentMethodId,
       phone,
       amount,
-      product_id,
+      cart,
+      // product_id,
     } = req.body;
+    console.log(cart);
+    const product_id = cart.map((item) => {
+      return item.product_id;
+    });
+    console.log(product_id);
+
     // console.log(typeof amount);
     // const payment_img = req?.file?.path ? req.file.path : "majdi";
     // console.log(payment_img);
