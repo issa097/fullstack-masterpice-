@@ -76,7 +76,8 @@ const authenticateToken = async (req, res, next) => {
     //     });
     // }
 
-    req.user = decoded.user_id; // Set the user in the request object for later use
+    req.user = decoded.user_id;
+    req.role = decoded.role// Set the user in the request object for later use
     next();
   } catch (error) {
     console.error(error);

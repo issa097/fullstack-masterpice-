@@ -1,7 +1,9 @@
 const db = require("../lib/db");
 
 function getAllContact() {
-  return db.query("SELECT * FROM contacts WHERE is_deleted = false");
+  return db.query(
+    "SELECT *, sendertype FROM contacts WHERE is_deleted = false AND sendertype = 'user' "
+  );
 }
 
 function getContactid(contact_id) {
@@ -43,7 +45,7 @@ async function deleteContact(contact_id) {
 }
 
 function updateContact(
-    contact_id,
+  contact_id,
   user_id,
   contact_name,
   contact_email,
@@ -75,6 +77,44 @@ function updateContact(
   return db.query(queryText, values);
 }
 
+// const db = require('../your-db-connection-file'); // Adjust this to your database connection file
+
+function getAllUserMessages() {
+  return db.query(
+    "SELECT *, sendertype FROM contacts WHERE is_deleted = false AND sendertype = 'admin'"
+  );
+}
+function getAllAdminMessages() {
+  return db.query(
+    "SELECT *, sendertype FROM contacts WHERE is_deleted = false AND sendertype = 'user'"
+  );
+}
+
+function addMessage(
+  user_id,
+  contact_name,
+  contact_email,
+  contact_message,
+  sendertype
+) {
+  try {
+    const queryText = `
+  INSERT INTO contacts(user_id,contact_name, contact_email, contact_message, sendertype)
+  VALUES($1, $2, $3, $4, $5)
+  RETURNING *`;
+    const result = [
+      user_id,
+      contact_name,
+      contact_email,
+      contact_message,
+      sendertype,
+    ];
+    return db.query(queryText, result);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 module.exports = {
   getAllContact,
   NewContact,
@@ -82,4 +122,7 @@ module.exports = {
   getCommentUser_di,
   deleteContact,
   updateContact,
+  addMessage,
+  getAllAdminMessages,
+  getAllUserMessages,
 };
