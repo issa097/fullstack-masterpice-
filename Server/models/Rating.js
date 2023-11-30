@@ -86,9 +86,21 @@ function getRatingByUser(user_id) {
   return db.query(queryText, valuse);
 }
 
+function getRatingByproduct(product_id) {
+  const queryText = "SELECT * FROM ratings WHERE product_id = $1 ";
+
+  // "SELECT c.comment_text, u.username FROM comments c " +
+  // "JOIN users u ON c.user_id = u.user_id " +
+  // "WHERE c.user_id = $1 AND c.product_id = $2",
+  const valuse = [product_id];
+
+  return db.query(queryText, valuse);
+}
+
 module.exports = {
   createRating,
   getAllRating,
   getRatingByUserAndProduct,
   getRatingByUser,
+  getRatingByproduct,
 };

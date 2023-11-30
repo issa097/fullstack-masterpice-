@@ -42,7 +42,8 @@ function newpayment(
       method_id,
       phone,
       amount,
-      product_id
+
+      product_id,
     ];
     return db.query(queryText, values);
   } catch (error) {
@@ -139,8 +140,6 @@ function newpayment(
 //     throw error;
 //   }
 // }
-
-
 
 function deletepayment(payment_id) {
   const queryText = "DELETE FROM payment WHERE payment_id = $1";

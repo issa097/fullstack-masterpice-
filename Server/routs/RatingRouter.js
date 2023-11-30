@@ -34,4 +34,11 @@ router.get(
   RatingController.getRatingByUserAndProduct
 );
 
+// authentication.authenticateToken,
+router.get(
+  "/gitRatings/:product_id",
+  // authentication.authenticateToken,
+  RatingController.getRatingByproduct
+);
+
 module.exports = router;

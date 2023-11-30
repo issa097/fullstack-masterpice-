@@ -55,7 +55,10 @@ const PaymentForm = () => {
     if (!stripe || !elements) {
       return;
     }
+    const totalPrice = cartData.reduce((acc, item) => acc + item.price, 0);
+    //const product_name = cartData.map((title) => title.product_name);
 
+    // console.log("object", product_name);
     // Validate inputs...
     try {
       const cardElement = elements.getElement(CardElement);
@@ -82,15 +85,21 @@ const PaymentForm = () => {
         "token"
       )}`;
 
+      // const price= cartData.map((d)=>{
+      //   return price.price
+
+      // })
+      // console.log("pprice", price);
       const response = await axios.post(`http://localhost:8000/charge`, {
         paymentMethodId: paymentMethod.id,
         email: userEmail.toLowerCase(),
         phone: userPhone,
         cardholder: cardholder,
-        amount: 500,
+        amount: totalPrice * 100, // Convert to cents if needed
         country: country,
         state: state,
         address: address,
+        // product_name: product_name,
         cart: cartData,
         // user_id: user_id,
         // product_id: 38,

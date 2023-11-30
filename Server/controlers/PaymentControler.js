@@ -16,13 +16,20 @@ const newpayment = async (req, res) => {
       paymentMethodId,
       phone,
       amount,
+      // product_name,
+
       cart,
+
       // product_id,
     } = req.body;
     console.log(cart);
+    // console.log(product_name);
     const product_id = cart.map((item) => {
       return item.product_id;
     });
+    // const product_name = cart.map((item) => {
+    //   return item.product_id;
+    // });
     console.log(product_id);
 
     // console.log(typeof amount);
@@ -31,12 +38,13 @@ const newpayment = async (req, res) => {
 
     try {
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: 500,
-        currency: "AED",
+        amount: amount,
+        currency: "USD",
         payment_method_types: ["card"], // Add the appropriate payment method types
         payment_method: paymentMethodId,
         confirm: true,
         description: "Done",
+
         return_url: "https://your-website.com/success", // Specify the return URL
       });
 
@@ -51,7 +59,8 @@ const newpayment = async (req, res) => {
           paymentMethodId,
           phone,
           amount,
-          product_id
+          product_id,
+
         );
 
         return res.status(200).json(newpayment.rows);

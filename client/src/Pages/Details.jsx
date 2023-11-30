@@ -4,6 +4,7 @@ import Axios from "axios";
 
 import swal from "sweetalert";
 import axios from "axios";
+import CommentSection from "../Components/Comment"
 
 function Details() {
   const { id } = useParams();
@@ -255,6 +256,7 @@ function Details() {
                   </span>
                 </a>
               </nav>
+
             </div>
 
             <div class="mt-8 flow-root sm:mt-12">
@@ -264,7 +266,10 @@ function Details() {
           </div>
         </div>
       </div>
+      <CommentSection/>
+
     </section>
+    
   );
 }
 
