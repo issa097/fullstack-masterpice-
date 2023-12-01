@@ -97,10 +97,45 @@ function getRatingByproduct(product_id) {
   return db.query(queryText, valuse);
 }
 
+function updateproducts(user_id, product_id, comment) {
+  const queryText = `
+    UPDATE ratings 
+    SET 
+      user_id = COALESCE($1, user_id), 
+      product_id = COALESCE($2, product_id), 
+      comment = COALESCE($3, comment)
+    WHERE 
+      user_id = $1 AND product_id = $2
+    RETURNING *`;
+
+  const values = [user_id, product_id, comment];
+  return db.query(queryText, values);
+}
+
+async function deleteRating(product_id) {
+  const queryText =
+    "UPDATE ratings SET is_deleted = true WHERE product_id = $1 AND is_deleted = false RETURNING *";
+  const values = [product_id];
+
+  try {
+    const result = await db.query(queryText, values);
+
+    if (result.rowCount === 0) {
+      throw new Error("Product not found or already deleted.");
+    }
+
+    return true; // Return true to indicate a successful deletion
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createRating,
   getAllRating,
   getRatingByUserAndProduct,
   getRatingByUser,
   getRatingByproduct,
+  updateproducts,
+  deleteRating
 };

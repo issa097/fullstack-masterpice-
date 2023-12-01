@@ -42,6 +42,7 @@ const getUser = async (req, res) => {
 
 const decode = (req, res) => {
   const { token } = req.body;
+  console.log("😂😂😂😂😂😂😂😂😂😂😂😂", token);
   try {
     const result = User.decodeToken(token, key);
     return res.status(200).json(result);

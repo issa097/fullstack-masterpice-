@@ -12,6 +12,7 @@ const express = require("express");
 const router = express.Router();
 const RatingController = require("../controlers/RatingControler");
 const authentication = require("../middlewares/authMiddleware");
+const jj = require("../middlewares/jj");
 
 // router.post('/create', RatingController.createRating);
 // router.get('/read/:id', RatingController.getRatingsByProduct);
@@ -38,6 +39,16 @@ router.get(
 router.get(
   "/gitRatings/:product_id",
   // authentication.authenticateToken,
+  RatingController.getRatingByproduct
+);
+router.put(
+  "/updateRating",
+  authentication.authenticateToken,
+  RatingController.updateproducts
+);
+router.put(
+  "/deletRating/:product_id",
+  authentication.authenticateToken,
   RatingController.getRatingByproduct
 );
 
