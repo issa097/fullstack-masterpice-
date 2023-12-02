@@ -97,7 +97,7 @@ function getRatingByproduct(product_id) {
   return db.query(queryText, valuse);
 }
 
-function updateproducts(user_id, product_id, comment) {
+function updaterating(user_id, product_id, comment) {
   const queryText = `
     UPDATE ratings 
     SET 
@@ -111,11 +111,26 @@ function updateproducts(user_id, product_id, comment) {
   const values = [user_id, product_id, comment];
   return db.query(queryText, values);
 }
+function updateratingid(rating_id, user_id, product_id, comment) {
+  const queryText = `
+    UPDATE ratings 
+    SET 
+    
+      user_id = COALESCE($2, user_id), 
+      product_id = COALESCE($3, product_id), 
+      comment = COALESCE($4, comment)
+    WHERE 
+    rating_id = $1 
+    RETURNING *`;
 
-async function deleteRating(product_id) {
+  const values = [rating_id, user_id, product_id, comment];
+  return db.query(queryText, values);
+}
+
+async function deleteRating(rating_id, user_id) {
   const queryText =
-    "UPDATE ratings SET is_deleted = true WHERE product_id = $1 AND is_deleted = false RETURNING *";
-  const values = [product_id];
+    "UPDATE ratings SET is_deleted = true WHERE rating_id = $1 AND user_id = $2 AND is_deleted = false RETURNING *";
+  const values = [rating_id, user_id];
 
   try {
     const result = await db.query(queryText, values);
@@ -136,6 +151,7 @@ module.exports = {
   getRatingByUserAndProduct,
   getRatingByUser,
   getRatingByproduct,
-  updateproducts,
-  deleteRating
+  updaterating,
+  deleteRating,
+  updateratingid,
 };

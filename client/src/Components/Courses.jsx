@@ -34,7 +34,7 @@ function Courses() {
   const [selectedWorkshop, setSelectedWorkshop] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-
+  // console.log(showAllWorkshops)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,8 +48,10 @@ function Courses() {
     fetchData();
   }, []);
 
-  const displayedworkshop = showAllWorkshops ? workshops : workshops.slice(0, 4);
-
+  const displayedworkshop = showAllWorkshops
+    ? workshops
+    : workshops.slice(0, 4);
+  console.log("dddddddd", displayedworkshop);
   const handleReadMoreClick = (workshop) => {
     setSelectedWorkshop(workshop);
     setIsModalOpen(true);
@@ -63,13 +65,19 @@ function Courses() {
     closeModal();
 
     // Retrieve the token from local storage
-    const token = localStorage.getItem("your_token_key"); // Replace with your actual token key
-
+    const token = localStorage.getItem("token"); // Replace with your actual token key
+    console.log("fffffffffffffffff", token);
     try {
+      axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+        "token"
+      )}`;
       // Send a request to your server to validate the token
-      const response = await axios.post("http://localhost:8000/validateToken", { token });
+      const response = await axios.post(
+        "http://localhost:8000/Newworkshop_bookings",
+        selectedWorkshop
+      );
 
-      if (response.data.isLoggedIn) {
+      if (response.data) {
         // Show sweet alert for registered users
         Swal({
           icon: "success",
@@ -78,7 +86,7 @@ function Courses() {
         });
       } else {
         // Show sweet alert for unregistered users
-        const result = await Swal({
+        Swal({
           icon: "warning",
           title: "You're not logged in!",
           text: "To save your seat, please sign up or log in.",
@@ -87,17 +95,25 @@ function Courses() {
           cancelButtonText: "Login Now",
         });
 
-        if (result.isConfirmed) {
-          // Redirect to the sign-up page
-          navigate("/signup");
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          // Redirect to the login page
-          navigate("/login");
-        }
+        // if (result.isConfirmed) {
+        //   // Redirect to the sign-up page
+        //   navigate("/signup");
+        // } else if (result.dismiss === Swal.DismissReason.cancel) {
+        //   // Redirect to the login page
+        //   navigate("/login");
+        // }
       }
     } catch (error) {
       console.error("Error validating token:", error);
       // Handle error (e.g., redirect to login page)
+      Swal({
+        icon: "warning",
+        title: "You're not logged in!",
+        text: "To save your seat, please sign up or log in.",
+        showCancelButton: true,
+        confirmButtonText: "Sign Up",
+        cancelButtonText: "Login Now",
+      });
       navigate("/login");
     }
   };
@@ -117,16 +133,26 @@ function Courses() {
         {/* Slider */}
         <Slider {...settings}>
           {displayedworkshop.map((workshop, index) => (
-            <div key={index} className="bg-white h-[450px] text-[#C08261] rounded-xl">
-              <div className='h-56 bg-[#C08261] flex justify-center items-center rounded-t-xl'>
-                <img src={workshop.workshop_img} alt="" className="h-44 w-44 rounded-full"/>
+            <div
+              key={index}
+              className="bg-white h-[450px] text-[#C08261] rounded-xl"
+            >
+              <div className="h-56 bg-[#C08261] flex justify-center items-center rounded-t-xl">
+                <img
+                  src={workshop.workshop_img}
+                  alt=""
+                  className="h-44 w-44 rounded-full"
+                />
               </div>
 
               <div className="flex flex-col items-center justify-center gap-4 p-4">
-                <p className="text-xl font-semibold">{workshop.workshop_name}</p>
+                <p className="text-xl font-semibold">
+                  {workshop.workshop_name}
+                </p>
                 <p className="text-center">{workshop.workshop_dis}</p>
                 <p className="text-center text-[#C08261]">
-                  Time: {workshop.workshop_start} - {workshop.workshop_end}
+                  Time-start: {workshop.workshop_start} <br />
+                  Time-end : {workshop.workshop_end}
                 </p>
                 <button
                   onClick={() => {
@@ -139,7 +165,9 @@ function Courses() {
                   <span className="absolute top-0 left-0 w-full h-0 transition-all duration-300 delay-200 bg-[#C08261] group-hover:h-full ease"></span>
                   <span className="absolute bottom-0 left-0 w-full h-0 transition-all duration-300 delay-200 bg-[#C08261] group-hover:h-full ease"></span>
                   <span className="absolute inset-0 w-full h-full duration-300 delay-300 bg-[#C08261] opacity-0 group-hover:opacity-100"></span>
-                  <span className="relative transition-colors duration-300 delay-200 group-hover:text-white ease">Save A Seat</span>
+                  <span className="relative transition-colors duration-300 delay-200 group-hover:text-white ease">
+                    Save A Seat
+                  </span>
                 </button>
               </div>
             </div>

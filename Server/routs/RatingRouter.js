@@ -12,7 +12,7 @@ const express = require("express");
 const router = express.Router();
 const RatingController = require("../controlers/RatingControler");
 const authentication = require("../middlewares/authMiddleware");
-const jj = require("../middlewares/jj");
+// const jj = require("../middlewares/jj");
 
 // router.post('/create', RatingController.createRating);
 // router.get('/read/:id', RatingController.getRatingsByProduct);
@@ -44,12 +44,18 @@ router.get(
 router.put(
   "/updateRating",
   authentication.authenticateToken,
-  RatingController.updateproducts
+  RatingController.updateproduct
 );
 router.put(
-  "/deletRating/:product_id",
+  "/updateRatingid/:rating_id",
   authentication.authenticateToken,
-  RatingController.getRatingByproduct
+  RatingController.updateratingid
+);
+
+router.put(
+  "/deleteRating/:rating_id",
+  authentication.authenticateToken,
+  RatingController.deleterating
 );
 
 module.exports = router;

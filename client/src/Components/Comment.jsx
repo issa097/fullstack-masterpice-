@@ -263,7 +263,7 @@ const CommentSection = ({ product_id }) => {
         `http://localhost:8000/gitRatings/${id}`
       );
       console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", response.data);
-      // setComments(response.data);
+      setComments(response.data);
       // if (response.data.user && response.data.user.user_id) {
       //   setuserid(response.data.user.user_id);
       // }
@@ -307,7 +307,7 @@ const CommentSection = ({ product_id }) => {
 
   useEffect(() => {
     // Call fetchComments when the component mounts
-    // fetchComments(id);
+    fetchComments(id);
     fetchCommentss();
   }, []);
 
@@ -410,7 +410,7 @@ const CommentSection = ({ product_id }) => {
                   <CiStar key={index} />
                 ))}
               </span>
-              {comment.user_id === loggedInUserId && (
+              {comment.user_id === userid.user_id && (
                 <>
                   <button
                     onClick={() =>

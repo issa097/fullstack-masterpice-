@@ -15,15 +15,19 @@ function newShop(
   workshop_name,
   workshop_dis,
   workshop_title,
-
+  // workshop_end,
+  workshop_img
+  // workshop_start
 ) {
   const queryText =
-    "INSERT INTO workshops (workshop_name, workshop_dis, workshop_title) VALUES ($1, $2, $3) RETURNING *";
+    "INSERT INTO workshops (workshop_name, workshop_dis, workshop_title,workshop_img) VALUES ($1, $2, $3,$4) RETURNING *";
   const values = [
     workshop_name,
     workshop_dis,
     workshop_title,
-  
+    // workshop_end,
+    workshop_img,
+    // workshop_start,
   ];
   return db.query(queryText, values);
 }
@@ -102,7 +106,6 @@ function updateShop(
 
   return db.query(queryText, values);
 }
-
 
 module.exports = {
   getAllShop,

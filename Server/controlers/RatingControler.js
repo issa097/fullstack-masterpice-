@@ -67,60 +67,62 @@ const getRatingByUser = async (req, res) => {
 };
 
 const getRatingByproduct = async (req, res) => {
-    // const user_id = req.user;
-    // const user_id=req.user
+  // const user_id=req.user
   const { product_id } = req.params;
 
   try {
     const comments = await ratingModel.getRatingByproduct(product_id);
-    const comment = comments.rows;
-    console.log(req.user);
-    return res.status(200).json( comment );
+    return res.status(200).json(comments.rows);
   } catch (error) {
     console.error("Error in commentController:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-const updateproducts = async (req, res) => {
+const updateproduct = async (req, res) => {
   // const product_img = res.locals.site;
   // const imagePath = req.file.path; // This assumes the Multer middleware is used
-  // console.log("product_img😜");
-  // console.log(product_img);
-  // console.log("product_img😜");
+
   const user_id = req.user;
-  console.log("000000", user_id);
   const { product_id, comment } = req.body;
-  console.log(product_id);
-  console.log(comment);
   try {
-    const result = await ratingModel.updateproducts(
+    const result = await ratingModel.updaterating(user_id, product_id, comment);
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    throw error;
+  }
+};
+const updateratingid = async (req, res) => {
+  // const product_img = res.locals.site;
+  // const imagePath = req.file.path; // This assumes the Multer middleware is used
+
+  const user_id = req.user;
+  const rating_id = req.params.rating_id;
+  const { product_id, comment } = req.body;
+  try {
+    const result = await ratingModel.updateratingid(
+      rating_id,
       user_id,
       product_id,
       comment
     );
     return res.status(200).json(result.rows);
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
 
-const deleteRating = async (req, res) => {
-
+const deleterating = async (req, res) => {
+  const rating_id = req.params.rating_id;
   const user_id = req.user;
-  
-  const { product_id } = req.body;
-  
+  console.log("ff", rating_id);
+  console.log("ff", user_id);
+
+  // const userid = req.user.user_id
   try {
-    const result = await ratingModel.deleteRating(
-      user_id,
-      product_id,
-      
-    );
+    const result = await ratingModel.deleteRating(rating_id, user_id);
     return res.status(200).json(result.rows);
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -130,6 +132,7 @@ module.exports = {
   getRatingByUserAndProduct,
   getRatingByUser,
   getRatingByproduct,
-  updateproducts,
-  deleteRating
+  updateproduct,
+  updateratingid,
+  deleterating,
 };
