@@ -77,6 +77,15 @@ const workshop = async (req, res) => {
     throw error;
   }
 };
+const workshopByUserId = async (req, res) => {
+  const user_id = req.user;
+  try {
+    const result = await workshop_bookings.workshopByUserId(user_id);
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    throw error;
+  }
+};
 
 module.exports = {
   getworkshop_bookings,
@@ -85,4 +94,5 @@ module.exports = {
   deleteworkshop_bookings,
   updateworkshop_bookings,
   workshop,
+  workshopByUserId
 };

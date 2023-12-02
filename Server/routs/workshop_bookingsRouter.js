@@ -17,9 +17,14 @@ router.get(
   "/getworkshop_bookingsByWorkShopid/:workshop_id",
   workshop_bookingsController.workshop
 );
+router.get(
+  "/workshopByUserId/:user_id",authentication.authenticateToken,
+  workshop_bookingsController.workshopByUserId
+);
 
 router.post(
-  "/Newworkshop_bookings",authentication.authenticateToken,
+  "/Newworkshop_bookings",
+  authentication.authenticateToken,
   workshop_bookingsController.Newworkshop_bookings
 );
 
