@@ -12,7 +12,20 @@ function getUser(user_id) {
   const value = [user_id];
   return db.query(queryText, value);
 }
+
+const getUserById = async (user_id) => {
+  const queryText = 'SELECT * FROM users WHERE user_id = $1';
+  const values = [user_id];
+  const result = await db.query(queryText, values);
+  return result.rows[0]; // Assuming user_id is unique, so only one row is expected
+};
+
 function getEmail(email) {
+  const queryText = "SELECT * FROM users WHERE email = $1";
+  const value = [email];
+  return db.query(queryText, value);
+}
+function getEmailAdmin(email) {
   const queryText = "SELECT * FROM users WHERE email = $1";
   const value = [email];
   return db.query(queryText, value);
@@ -46,20 +59,52 @@ function deleteUser(user_id) {
 //   const value = [user_id, username, email, password];
 //   return db.query(queryText, value);
 // }
-function updateUser(user_id, username, email, password) {
+function updateUser(
+  user_id,
+  username,
+  email,
+  
+  user_img,
+  phone_number,
+  birthday
+) {
   const queryText = `
     UPDATE users 
     SET 
       username = COALESCE($2, username), 
       email = COALESCE($3, email), 
-      password = COALESCE($4, password)
+     
+      user_img = COALESCE($4, user_img),
+      phone_number = COALESCE($5, phone_number),
+      birthday = COALESCE($6, birthday)
     WHERE 
       user_id = $1 
     RETURNING *`;
 
-  const values = [user_id, username, email, password];
+  const values = [
+    user_id,
+    username,
+    email,
+    
+    user_img,
+    phone_number,
+    birthday,
+  ];
   return db.query(queryText, values);
 }
+
+const updatePassword = async (user_id, hashedPassword) => {
+  const queryText = `
+    UPDATE users 
+    SET 
+      password = $2
+    WHERE 
+      user_id = $1 
+    RETURNING *`;
+
+  const values = [user_id, hashedPassword];
+  return db.query(queryText, values);
+};
 
 function decodeToken(token, key) {
   let userData = {};
@@ -103,4 +148,7 @@ module.exports = {
   decodeToken,
   loginUser,
   UserProfile,
+  updatePassword,
+  getUserById,
+  getEmailAdmin
 };

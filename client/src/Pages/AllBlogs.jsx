@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Nav from '../Components/Nav';
+import Footer from '../Components/Footer';
 
 function AllBlogs() {
   const [blogs, setBlogs] = useState([]);
@@ -28,6 +30,8 @@ function AllBlogs() {
   }
 
   return (
+    <>
+      <Nav />
     <div className="bg-gray-100 px-2 py-10">
       {blogs.map((blog) => (
         <Link key={blog.blog_id} to={`/blogsdetails/${blog.blog_id}`}>
@@ -46,6 +50,8 @@ function AllBlogs() {
         </Link>
       ))}
     </div>
+    <Footer />
+    </>
   );
 }
 

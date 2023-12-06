@@ -7,7 +7,7 @@ function AddWishlist(product_id, user_id) {
 }
 
 function getWishlist(user_id) {
-  const queryText = `SELECT products.product_name, products.price, products.product_img FROM wishlist
+  const queryText = `SELECT products.product_name, products.price, products.product_img , products.product_dis FROM wishlist
     JOIN products ON wishlist.product_id = products.product_id
     WHERE wishlist.user_id = $1;`;
   const result = [user_id];

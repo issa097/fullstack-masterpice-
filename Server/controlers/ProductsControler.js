@@ -59,23 +59,23 @@ const getBlogs = async (req, res) => {
 // Assuming your route handler uses EJS to render the template
 // const getBlogs = async (req, res) => {
 //   try {
-//     // const page = req.params.page;
-//     // const limit = req.params.limit;
-//     // const offset = (page - 1) * limit;
-//     // // console.log("I am here",page ,limit );
-//     // console.log(page, limit);
+//     const page = req.params.page;
+//     const limit = req.params.limit;
+//     const offset = (page - 1) * limit;
+//     // console.log("I am here",page ,limit );
+//     console.log(page, limit);
 
-//     // const result = await products.getAllblogs(limit, offset);
+//     const result = await products.getAllblogs(limit, offset);
 
-//     // const totalCount = await products.getTotalCount(); // Implement a function to get the total count of products
-//     // const totalPages = Math.ceil(totalCount / limit);
+//     const totalCount = await products.getTotalCount(); // Implement a function to get the total count of products
+//     const totalPages = Math.ceil(totalCount / limit);
 
-//     // const pagination = {
-//     //   current: page,
-//     //   prev: page > 1 ? page - 1 : null,
-//     //   next: page < totalPages ? parseInt(page) + 1 : null,
-//     //   total: totalPages,
-//     // };
+//     const pagination = {
+//       current: page,
+//       prev: page > 1 ? page - 1 : null,
+//       next: page < totalPages ? parseInt(page) + 1 : null,
+//       total: totalPages,
+//     };
 
 //     res.json({result,totalPages,pagination});
 //   } catch (error) {

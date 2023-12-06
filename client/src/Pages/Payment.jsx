@@ -1,5 +1,6 @@
 import { Card } from "@material-tailwind/react";
 import React, { useState, useEffect, useContext } from "react";
+import swal from "sweetalert";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   CardElement,
@@ -9,6 +10,8 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useOrder } from "../OrderContext/OrderContext";
+import Nav from "../Components/Nav";
+import Footer from "../Components/Footer";
 
 // import "react-phone-number-input/style.css";
 // import GoogleSignInButton from "./GoogleSignInButton";
@@ -117,18 +120,19 @@ const PaymentForm = () => {
   };
 
   const showAlert = (message, icon) => {
-    alert(message, icon);
-    // Swal.fire({
-    //   title: icon === "success" ? "Success" : "Error",
-    //   text: message,
-    //   icon: icon,
-    //   confirmButtonText: "OK",
-    // });
+    // alert(message, icon);
+    swal({
+      title: icon === "success" ? "Success" : "Error",
+      text: message,
+      icon: icon,
+      confirmButtonText: "OK",
+    });
   };
   return (
     <>
       {true ? (
         <>
+        <Nav />
           <Card className="my-10 w-8/12 mx-auto bg-gray-50 px-4 pt-8 lg:mt-5">
             <p className="text-xl font-medium">Payment Details</p>
             <p className="text-gray-400">
@@ -293,7 +297,7 @@ const PaymentForm = () => {
               ) : (
                 <button
                   type="submit"
-                  className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+                  className="mt-4 mb-8 w-full rounded-md bg-[#C08261] px-6 py-3 font-medium text-white"
                 >
                   Place Order
                 </button>
@@ -317,6 +321,7 @@ const Payment = () => {
       <Elements stripe={stripePromise}>
         <PaymentForm />
       </Elements>
+      <Footer />
     </>
   );
 };

@@ -15,6 +15,9 @@ import NotFound from "./Pages/NotFound";
 import AllBlogs from "./Pages/AllBlogs";
 import BlogsDetails from "./Pages/BlogsDetails";
 import { OrderProvider } from "./OrderContext/OrderContext";
+import AboutUs from "../src/Pages/AboutUs"
+import ContactUs from "./Pages/ContactUs";
+import Side from "./Components/Side";
 
 const App = () => {
   return (
@@ -24,18 +27,19 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/details/:id" element={<Details />} />
           <Route path="/AllProducts" element={<AllProducts />} />
-          <Route path="/ContactUs" element={<Contact />} />
+          <Route path="/ContactUs" element={<ContactUs/>} />
           <Route path="/Categories" element={<Categories />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/side" element={<Side />} />
           <Route path="/admin" element={<YourComponent />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/allblogs" element={<AllBlogs />} />
           <Route path="/blogsdetails/:id" element={<BlogsDetails />} />
           {/* <Route path='/payment' element={<PaymentForm />} /> */}
+          <Route path="/aboutus" element={<AboutUs />} />
         </Routes>
       </OrderProvider>
     </Router>

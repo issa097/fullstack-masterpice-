@@ -39,12 +39,12 @@ const Nav = () => {
                   Products
                 </Link>
 
-                <Link to="AboutUs" title="" className="text-base font-medium text-white">
+                <Link to="/Aboutus" title="" className="text-base font-medium text-white">
                   {" "}
                   About Us
                 </Link>
 
-                <Link to="Contactus" title="" className="text-base font-medium text-white">
+                <Link to="/Contactus" title="" className="text-base font-medium text-white">
                   {" "}
                   Contact Us
                 </Link>
@@ -104,7 +104,7 @@ const Nav = () => {
                 {check() ? (
                   <div className="hidden lg:flex justify-end lg:items-center lg:space-x-10">
                     <Link
-                      to="/userprofile"
+                      to="/side"
                       title=""
                       className="flex items-center justify-center w-10 h-10 text-white"
                     >

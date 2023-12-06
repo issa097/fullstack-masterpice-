@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Nav from '../Components/Nav';
+import Footer from '../Components/Footer';
 
 function AllCourses() {
   const [workshops, setWorkshops] = useState([]);
@@ -12,6 +14,8 @@ function AllCourses() {
   }, []); 
 
   return (
+    <>
+    <Nav />
     <div className="m-10 mx-4 max-w-screen-lg overflow-hidden rounded-xl border shadow-lg md:pl-8">
       {workshops.map(workshop => (
         <div key={workshop.workshop_id} className="flex flex-col overflow-hidden bg-white sm:flex-row md:h-80">
@@ -45,6 +49,8 @@ function AllCourses() {
         </div>
       ))}
     </div>
+    <Footer />
+    </>
   );
 }
 

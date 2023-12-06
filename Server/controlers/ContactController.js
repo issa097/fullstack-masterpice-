@@ -1,4 +1,3 @@
-// const { admin } = require("../middlewares/MulterMiddlewares");
 const Contact = require("../models/Contact");
 
 const getAllContact = async (req, res) => {
@@ -79,9 +78,8 @@ const updateContact = async (req, res) => {
   }
 };
 
-
-
 const addContactMessage = async (req, res) => {
+  console.log("object");
   const user_id = req.user;
   const role = req.role;
   console.log(req.role);
@@ -105,11 +103,24 @@ const getUserMessages = async (req, res) => {
   try {
     const result = await Contact.getAllUserMessages();
     console.log(result);
-    return res.status(200).json(result.rows);
+
+    if (result.rows.length > 0) {
+      return res.status(200).json(result.rows);
+    } else {
+      return res.status(404).json({ message: "No messages found." });
+    }
   } catch (error) {
-    throw error;
+    console.error("Error fetching user messages:", error);
+
+    // Handle different types of errors and send an appropriate response
+    if (error instanceof CustomDatabaseError) {
+      return res.status(500).json({ message: "Database error occurred." });
+    } else {
+      return res.status(500).json({ message: "Internal server error." });
+    }
   }
 };
+
 // const getAdminMessages = async (req, res) => {
 //   // const user_id = req.user;
 //   try {

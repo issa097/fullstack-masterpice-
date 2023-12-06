@@ -1,8 +1,13 @@
 const db = require("../lib/db");
 
+// function getAllContact() {
+//   return db.query(
+//     "SELECT *, sendertype FROM contacts WHERE is_deleted = false AND sendertype = 'user' "
+//   );
+// }
 function getAllContact() {
   return db.query(
-    "SELECT *, sendertype FROM contacts WHERE is_deleted = false AND sendertype = 'user' "
+    "SELECT * FROM contacts WHERE is_deleted = false  "
   );
 }
 
@@ -81,12 +86,20 @@ function updateContact(
 
 function getAllUserMessages() {
   return db.query(
-    "SELECT *, sendertype FROM contacts WHERE is_deleted = false AND sendertype = 'admin'"
+    `SELECT contacts.*, users.user_img, contacts.sendertype
+    FROM contacts
+    JOIN users ON contacts.user_id = users.user_id
+    WHERE contacts.is_deleted = false AND contacts.sendertype = 'admin';
+    `
   );
 }
 function getAllAdminMessages() {
   return db.query(
-    "SELECT *, sendertype FROM contacts WHERE is_deleted = false AND sendertype = 'user'"
+    `SELECT contacts.*, users.user_img, contacts.sendertype
+    FROM contacts
+    JOIN users ON contacts.user_id = users.user_id
+    WHERE contacts.is_deleted = false AND contacts.sendertype = 'user';
+    `
   );
 }
 

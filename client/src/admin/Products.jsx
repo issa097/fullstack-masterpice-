@@ -12,17 +12,17 @@ const ProductDashboard = () => {
   const productsPerPage = 10;
   const [pageNumber, setPageNumber] = useState(0);
   const [isAddProductFormVisible, setIsAddProductFormVisible] = useState(false);
-
+  // const page = 5;
+  // const limit = 4;
   useEffect(() => {
     // Fetch products from your API endpoint
     axios
-      .get("http://localhost:8000/products")
+      .get(`http://localhost:8000/products`)
       .then((response) => {
-        console.log(response.data); // Log the entire response to see its structure
-        const fetchedProducts = response.data || []; // Check for 'products' property
+        const fetchedProducts = response.data; // Check for 'products' property
         setProducts(fetchedProducts);
         setSearchResults(fetchedProducts);
-        console.log(response.data);
+        console.log("dd", fetchedProducts); // Log the entire response to see its structure
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

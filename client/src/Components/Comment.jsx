@@ -416,7 +416,7 @@ const CommentSection = ({ product_id }) => {
                     onClick={() =>
                       handleEditComment(comment.id, comment.comment)
                     }
-                    className="bg-yellow-500 text-white px-2 py-1 rounded ml-2"
+                    className="bg-[#C08261]  text-white px-2 py-1 rounded ml-2"
                   >
                     Edit
                   </button>

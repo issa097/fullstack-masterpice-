@@ -35,16 +35,14 @@ export default function GoolgeSignInButton() {
               "http://localhost:8000/google",
               res.data
             );
-            console.log(res);
+            console.log(res)
 
             console.log(response.data);
-            // const user = response.data.user;
+      
             const token = response.data.token;
-            // window.Cookie.set("token", token);
+     
             localStorage?.setItem("token", token);
-            // console.log(response.data.token);
-            // console.log("object", token);
-            // navigate('/');
+    
           } catch (error) {
             console.log(error);
           }

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert";
 import GoolgeSignInButton from "../Components/GoogleSignup";
+import Cookies from "js-cookie"
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -46,8 +47,14 @@ const LoginForm = () => {
       console.log(response.data);
 
       const user = response.data.user;
+      const role=response.data.user.role
       const token = response.data.token;
       localStorage.setItem("token", token);
+      Cookies.set('Token', token);
+      // Cookies.set('user_id', userId);
+      sessionStorage.setItem('role',role);
+      // localStorage.setItem("Token",response.data.authToken);
+
 
       if (user) {
         redirectToHome("/");
@@ -85,7 +92,7 @@ const LoginForm = () => {
             <p className="text-sm mt-10 text-white">
               Don't have an account{" "}
               <Link
-                to="/regestier"
+                to="/register"
                 className="text-white font-semibold underline ml-1"
               >
                 Register here{" "}

@@ -45,19 +45,19 @@ const User = require("../models/users");
 const SECRET_KEY = "issa";
 
 const authenticateToken = async (req, res, next) => {
-  // const token = req.headers.cookie;
-  // const auth = token.split("=")[1].trim();
+  const token = req.headers.cookie;
+  const auth = token.split("=")[1].trim();
 
   try {
     const token = req.headers.authorization;
     console.log("😜😜😜😜", token);
-    if (!token) {
+    if (!auth) {
       return res
         .status(401)
         .json({ success: false, message: "You need to login first" });
     }
 
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(auth, SECRET_KEY);
 
     if (!decoded.user_id) {
       return res

@@ -150,6 +150,8 @@ import Counter from "../Components/Counter";
 import { Link } from "react-router-dom";
 import Payment from "./Payment";
 import { useOrder } from "../OrderContext/OrderContext";
+import Footer from "../Components/Footer";
+import Nav from "../Components/Nav";
 
 const Cart = () => {
   const [cartProduct, setCartProduct] = useState([]);
@@ -244,6 +246,8 @@ const Cart = () => {
   };
 
   return (
+    <>
+    <Nav />
     <section className="h-full py-12 sm:py-16 lg:py-20">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center">
@@ -274,7 +278,7 @@ const Cart = () => {
                     <button
                       type="button"
                       onClick={handleCheckout}
-                      className="group inline-flex w-full items-center justify-center rounded-md bg-[#17403C] px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-[#C3CAC3]"
+                      className="group inline-flex w-full items-center justify-center rounded-md bg-[#C08261]  px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-[#C3CAC3]"
                     >
                       Checkout
                       <svg
@@ -302,6 +306,8 @@ const Cart = () => {
         )}
       </div>
     </section>
+    <Footer />
+    </>
   );
 };
 
